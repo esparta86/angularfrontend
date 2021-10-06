@@ -24,5 +24,6 @@ jobs:
           command: npm install @angular/cli
       - run:
           name: BUILD
-          command: ng build
-      - run: ls -lh         
+          command: npm build
+      - run: ls -lh
+   
