@@ -1,22 +1,9 @@
-orbs:
-  gcp-cli: circleci/gcp-cli@2.2.0
-version: 2.1
+version: 2
 jobs:
   build:
+    working_directory: ~/project
     docker:
-      - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
-        auth:
-          username: esparta2018
-          password: L19a10r86c#1986  # context / project UI env-var reference
+      - image: circleci/node:12-browsers
     steps:
       - checkout
-      - run: mkdir directorio
-      - run: ls -lh # run the `echo` command
-workflows:
-    gcp-workflow:
-      jobs:
-        - gcp-cli/install_and_initialize_cli:
-            gcloud-service-key: GCLOUD_SERVICE_KEY 
-            google-compute-zone: GOOGLE_COMPUTE_ZONE 
-            google-project-id: GOOGLE_PROJECT_ID
-        - build
+      - run: ls -lh  
