@@ -21,4 +21,4 @@ jobs:
             - node_modules
       - run:
           name: Install dependencies - angularCli
-          command:  npm install -g @angular/cli                                  
+          command: npm install @angular/cli
