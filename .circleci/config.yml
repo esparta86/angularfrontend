@@ -25,5 +25,19 @@ jobs:
       - run:
           name: BUILD
           command: npm run build
-      - run: ls -lh
+      - persist_to_workspace:
+          root: /home/circleci/project/dist/
+          paths:
+            - angular-app/dist        
+workflos:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
+
+      
    
