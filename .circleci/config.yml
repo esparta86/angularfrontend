@@ -6,8 +6,6 @@ jobs:
       - image: circleci/node:12-browsers
     steps:
       - checkout
-      - run: npm -v
-      - run: echo $PWD
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package-lock.json" }}
@@ -25,7 +23,7 @@ jobs:
       - run:
           name: BUILD
           command: npm run build
-      - run: cd dist & echo $PWD
+      - run: ls -lh & echo $PWD
       - persist_to_workspace:
           root: /home/circleci/project/dist/
           paths:
