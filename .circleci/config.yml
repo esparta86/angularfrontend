@@ -23,7 +23,7 @@ jobs:
       - run:
           name: BUILD
           command: npm run build
-      - run: ls -lh & echo $PWD
+      - run: ls -lh
       - persist_to_workspace:
           root: /home/circleci/project/dist/
           paths:
