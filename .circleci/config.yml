@@ -22,3 +22,7 @@ jobs:
       - run:
           name: Install dependencies - angularCli
           command: npm install @angular/cli
+      - run:
+          name: BUILD
+          command: ng build
+      - run: ls -lh         
