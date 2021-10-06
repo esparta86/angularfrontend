@@ -25,6 +25,7 @@ jobs:
       - run:
           name: BUILD
           command: npm run build
+      - run: cd dist & echo $PWD
       - persist_to_workspace:
           root: /home/circleci/project/dist/
           paths:
