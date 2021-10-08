@@ -27,8 +27,10 @@ jobs:
       - persist_to_workspace:
           root: /home/circleci/project/dist/
           paths:
-            - angular-app/dist        
-workflos:
+            - angular-app/dist       
+orbs:
+  cypress: cypress-io/cypress@1.0.0 
+workflows:
   version: 2
   build_and_deploy:
     jobs:
@@ -37,6 +39,12 @@ workflos:
             branches:
               only:
                 - develop
+      - cypress/install:
+           build: "npm run build"
+      - cypress/run:
+           record: true
+           parallel: true
+           parallelism: 10
 
       
    
