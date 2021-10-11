@@ -22,7 +22,7 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('unicomerFront');
   });
 
-  it(`should have as title 'unicomerFront'`, () => {
+  xit(`should have as title 'unicomerFront'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).not.toEqual('unicomerFront');
