@@ -26,6 +26,11 @@ jobs:
       - run:
           name: BUILD
           command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules/*
+            - cypress/*
       - run:
           name: Run Cypress tests
           command: npm run cypress:run
