@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
 jobs:
   build:
     working_directory: ~/project
@@ -29,11 +31,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - node_modules/*
-            - cypress/*
-      - run:
-          name: Run Cypress tests
-          command: npm run cypress:run
+            - dist/*
 workflows:
   version: 2
   build_and_deploy:
