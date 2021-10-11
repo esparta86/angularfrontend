@@ -21,6 +21,9 @@ jobs:
           name: Install dependencies - angularCli
           command: npm install @angular/cli
       - run:
+          name: Testing Jest
+          command: npm run test
+      - run:
           name: BUILD
           command: npm run build
       - run: ls -lh
