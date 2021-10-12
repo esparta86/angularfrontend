@@ -4,6 +4,7 @@ jobs:
     working_directory: ~/project
     docker:
       - image: circleci/node:12-browsers
+      - image: cypress/base:10
     steps:
       - checkout
       - restore_cache:
