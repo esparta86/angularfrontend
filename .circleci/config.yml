@@ -17,7 +17,8 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run:
+            - ~/.cache
+      - run: 
           name: Install dependencies - angularCli
           command: npm install @angular/cli
       - run:
