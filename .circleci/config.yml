@@ -49,6 +49,9 @@ jobs:
       - run:
           name: Install project dependencies
           command: npm ci
+      - run:
+          name: Start Project
+          command: npm run start
       - restore_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
