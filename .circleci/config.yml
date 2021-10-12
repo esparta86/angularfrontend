@@ -49,6 +49,6 @@ workflows:
             branches:
               only:
                 - develop
-
-      
-   
+      - deploy:
+          requires:
+            - build
