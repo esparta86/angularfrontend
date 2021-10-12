@@ -11,9 +11,6 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
       - run:
-          name: Install project dependencies
-          command: npm ci
-      - run:
           name: install dependencies
           command: npm install
       - save_cache:
@@ -49,6 +46,9 @@ jobs:
       - image: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
       - checkout
+      - run:
+          name: Install project dependencies
+          command: npm ci
       - restore_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
