@@ -30,16 +30,16 @@ jobs:
           root: .
           paths:
             - .
-deploy:
-  working_directory: ~/project
-  docker:
-    - image: innovatorjapan/awscli:latest
-  steps:
-    - attach_workspace:
-        at: .
-    - run:
-        name: Deploy
-        command: aws s3 sync dist/unicomerFront/ s3://unicomer-front-dev/ --delete --exact-timestamps;
+  deploy:
+    working_directory: ~/project
+    docker:
+      - image: innovatorjapan/awscli:latest
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploy
+          command: aws s3 sync dist/unicomerFront/ s3://unicomer-front-dev/ --delete --exact-timestamps;
 workflows:
   version: 2
   build_and_deploy:
