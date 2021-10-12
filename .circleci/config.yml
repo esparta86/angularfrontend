@@ -11,12 +11,15 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
       - run:
+          name: Install project dependencies
+          command: npm ci
+      - run:
           name: install dependencies
           command: npm install
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
-            - ~/.cache
+            - node_modules
       - run: 
           name: Install dependencies - angularCli
           command: npm install @angular/cli
