@@ -40,35 +40,6 @@ jobs:
       - run:
           name: Deploy
           command: aws s3 sync dist/unicomerFront/ s3://unicomer-front-dev/ --delete --exact-timestamps;
-  install_dependencies:
-    docker:
-      - image: circleci/node:12
-    steps:
-      - checkout
-      - restore_cache:
-          key: npm-cache-{{ checksum "package.json" }}
-      - run:
-          name: Install project dependencies
-          command: npm ci
-      - save_cache:
-          key: npm-cache-{{ checksum "package.json" }}
-          paths:
-            - ~/.npm
-            - ~/.cache
-  run_cypress_tests:
-    docker:
-      - image: cypress/browsers:node12.18.3-chrome87-ff82
-    steps:
-      - checkout
-      - restore_cache:
-          key: npm-cache-{{ checksum "package.json" }}
-      - run:
-          name: Running cypress tests
-          command: npm run cypress:run
-      - store_artifacts:
-          path: cypress/videos
-      - store_artifacts:
-          path: cypress/screenshots
 workflows:
   version: 2
   build_and_deploy:
@@ -81,7 +52,3 @@ workflows:
       - deploy:
           requires:
             - build
-      - install_dependencies
-      - run_cypress_tests:
-          requires:
-            - install_dependencies
