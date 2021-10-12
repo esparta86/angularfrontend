@@ -49,7 +49,7 @@ jobs:
           key: npm-cache-{{ checksum "package.json" }}
       - run:
           name: Running cypress tests
-          command: npm run cypres:run
+          command: npm run cypress:run
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
