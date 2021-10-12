@@ -10,15 +10,23 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json"
+          "tsconfig.json",
+          "tsconfig.spec.json",
+          "cypress/tsconfig.json"
         ],
         "createDefaultProgram": true
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:prettier/recommended"
+        "airbnb-typescript/base",
+        "prettier",
+        "plugin:cypress/recommended"
       ],
+      "plugins": ["prettier","import","cypress"],
+      "env": {
+        "cypress/globals": true
+      },
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
@@ -35,7 +43,15 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "import/prefer-default-export": "off",
+        "prettier/prettier": "error",
+        "cypress/no-assigning-return-values": "error",
+        "cypress/no-unnecessary-waiting": "error",
+        "cypress/assertion-before-screenshot": "warn",
+        "cypress/no-force": "warn",
+        "cypress/no-async-tests": "error",
+        "cypress/no-pause": "error"
       }
     },
     {
@@ -43,16 +59,12 @@
         "*.html"
       ],
       "extends": [
-        "plugin:@angular-eslint/template/recommended"
+        "plugin:@angular-eslint/template/recommended",
+        "prettier"
       ],
-      "rules": {}
-    },
-    {
-      "files": ["*.html"],
-      "excludedFiles": ["*inline-template-*.component.html"],
-      "extends": ["plugin:prettier/recommended"],
+      "plugins": ["prettier"],
       "rules": {
-        "prettier/prettier": ["error", { "parser": "angular" }]
+        "prettier/prettier": "error"
       }
     }
   ]
