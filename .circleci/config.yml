@@ -46,8 +46,8 @@ jobs:
       - image: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
       - checkout
-      - restore_cache:
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
+      - attach_workspace:
+          at: .
       - run:
           name: Running cypress tests
           command: npm run cypress:run
