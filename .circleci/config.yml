@@ -39,7 +39,7 @@ deploy:
         at: .
     - run:
         name: Deploy
-        command: aws s3 sync dist/unicomerFrontDev/ s3://unicomer-front-dev/ --delete --exact-timestamps;
+        command: aws s3 sync dist/unicomerFront/ s3://unicomer-front-dev/ --delete --exact-timestamps;
 workflows:
   version: 2
   build_and_deploy:
