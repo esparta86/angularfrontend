@@ -56,6 +56,9 @@ jobs:
           name: Initialize gcloud
           command: ./authgcloud.sh
       - run:
+          name: gcloud config show
+          command:  gcloud config list         
+      - run:
           name: list files
           command: ls dist/
       - run:
