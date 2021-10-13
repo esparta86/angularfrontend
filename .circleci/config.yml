@@ -46,7 +46,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
         environment:
-          STORAGE_BUCKET: website.com
+          STORAGE_BUCKET: angular-frontend-app
     steps:
       - attach_workspace:
           at: /tmp/workspace
@@ -67,8 +67,8 @@ workflows:
           filters:
             branches:
               only:
-                - develop
-      - deploy:
-          requires:
-            - build
+                - gcp
+      # - deploy:
+      #     requires:
+      #       - build
       - deploy-gcp
