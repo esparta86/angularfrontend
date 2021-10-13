@@ -50,6 +50,8 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - run: chmod +x authgcloud.sh
+      - run: chmod +x deploy.sh
       - run:
           name: Initialize gcloud
           command: ./authgcloud.sh
