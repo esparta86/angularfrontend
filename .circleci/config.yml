@@ -8,16 +8,16 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package-lock.json" }}
+          - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
       - run:
           name: install dependencies
           command: npm install
       - save_cache:
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run:
+      - run: 
           name: Install dependencies - angularCli
           command: npm install @angular/cli
       - run:
@@ -26,13 +26,41 @@ jobs:
       - run:
           name: BUILD
           command: npm run build
-      - run: ls -lh
       - persist_to_workspace:
-          root: /home/circleci/project/dist/
+          root: .
           paths:
-            - angular-app/dist       
-orbs:
-  cypress: cypress-io/cypress@1.29.0 
+            - .
+  deploy:
+    working_directory: ~/project
+    docker:
+      - image: innovatorjapan/awscli:latest
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploy
+          command: aws s3 sync dist/unicomerFront/ s3://unicomer-front-dev/ --delete --exact-timestamps;
+  run_cypress_tests:
+    working_directory: ~/project/unicomerfrontdev
+    docker:
+      - image: cypress/browsers:node12.18.3-chrome87-ff82
+    steps:
+      - checkout
+      - run:
+          name: Install project dependencies
+          command: npm ci
+      - run:
+          name: Start Project
+          command: npm run start
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Running cypress tests
+          command: npm run cypress:run
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
 workflows:
   version: 2
   build_and_deploy:
@@ -42,12 +70,9 @@ workflows:
             branches:
               only:
                 - develop
-      - cypress/install:
-           build: "npm run build"
-      - cypress/run:
-           record: true
-           parallel: true
-           parallelism: 10
-
-      
-   
+      - run_cypress_tests:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - run_cypress_tests
