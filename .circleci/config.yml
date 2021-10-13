@@ -49,16 +49,16 @@ jobs:
           STORAGE_BUCKET: angular-frontend-app
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: .
       - run:
           name: Initialize gcloud
-          command: /tmp/workspace/build/authgcloud.sh
+          command: ./authgcloud.sh
       - run:
           name: list files
-          command: ls /tmp/workspace/dist
+          command: ls dist/
       - run:
           name: deploy
-          command: /tmp/workspace/build/deploy.sh
+          command: ./deploy.sh
 workflows:
   version: 2
   build_and_deploy:
