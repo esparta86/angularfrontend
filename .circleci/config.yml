@@ -56,7 +56,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Running cypress tests
-          command: npm run cypress:run
+          command: npm run ci:cy-run
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
