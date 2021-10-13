@@ -41,7 +41,6 @@ jobs:
           name: Deploy
           command: aws s3 sync dist/unicomerFront/ s3://unicomer-front-dev/ --delete --exact-timestamps;
   run_cypress_tests:
-    working_directory: ~/project/unicomerfrontdev
     docker:
       - image: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
