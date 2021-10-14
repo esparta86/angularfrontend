@@ -285,7 +285,9 @@ def sendNotificationEmail(String buildResult = 'STARTED',String emailsList) {
 
 // Start the definition of pipeline
 pipeline {
-  docker { image 'node:latest' }
+  agent {
+    docker { image 'node:12-slim' }
+  }
   stages {
    stage('Start'){
       // when {
