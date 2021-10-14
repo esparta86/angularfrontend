@@ -19,7 +19,7 @@
 #gcloud builds submit -t gcr.io/ti-is-devenv-01/is-rendered:v3 --gcs-log-dir=gs://ti-is-devenv-01_cloudbuild_custom_logs_cicd/logs/ .
 
 #gcloud builds submit -t gcr.io/esparta86project/angularapp:v1 .  --gcs-log-dir=gs://ti-is-devenv-01_cloudbuild_custom_logs_cicd/logs/ .
-FROM node:12-slim as build-step
+FROM node:latest as build-step
 
 # Create and change to the app directory.
 WORKDIR /usr/src/app

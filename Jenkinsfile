@@ -347,7 +347,7 @@ pipeline {
       //      expression { currentBuild.changeSets.size() > 0 }
       //   }
       steps {
-          sh '/usr/bin/npm npm install'
+          sh 'npm install'
           // script{
           //     if(currentBuild.changeSets.size() > 0) {
           //           changesCommit = 'TRUE'
