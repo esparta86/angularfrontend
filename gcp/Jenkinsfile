@@ -352,7 +352,7 @@ spec:
                 }           
             }
           //sendNotificationSlack 'STARTED'
-          sendNotificationEmail 'STARTED',emailsList 
+          //sendNotificationEmail 'STARTED',emailsList 
         }
    }
 
@@ -409,7 +409,7 @@ spec:
     post {
         always {
 	         // sendNotificationSlack currentBuild.currentResult
-            sendNotificationEmail currentBuild.currentResult,emailsList
+           // sendNotificationEmail currentBuild.currentResult,emailsList
         }
        
     }
