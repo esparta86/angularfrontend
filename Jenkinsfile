@@ -342,6 +342,13 @@ pipeline {
     }
   }
   stages {
+  stages {
+      stage('Test') {
+          steps {
+              sh 'node --version'
+          }
+      }
+  }
    stage('Start'){
       // when {
       //      expression { currentBuild.changeSets.size() > 0 }
