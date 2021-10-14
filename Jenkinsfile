@@ -338,6 +338,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: node
+    image: node:latest
+    command:
+    - cat
+    tty: true
 """
 }
   }
