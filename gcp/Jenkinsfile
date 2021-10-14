@@ -39,12 +39,6 @@ def  imageContainerBase = "gcr.io/${project}/it-angular-app:v1"
 // @changesCommit boolean variable  that could be change to TRUE if there are changes in the branch
 def  changesCommit = 'FALSE'
 
-// @namePipeline it will store the name of pipeline in Jenkins.
-// Jenkins Dev : https://jenkinsdev.telusinternational.com  | Access using your LDAP credentials
-// Jenkins Prod ti-ca-infrastructure : http://35.247.127.111:8080/    |  Please do a request to Architecture team
-// Jenkins Prod ti-is-prodenv-01 : https://jenkins.apps-telusinternational.com/    |  Please do a request to Architecture team
-//Example:
-// def  namePipeline = "glogger-web-app-ti-is-devenv-external"
 def  namePipeline = "angular-webapp-development"
 
 
