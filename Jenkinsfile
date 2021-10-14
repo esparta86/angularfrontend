@@ -344,14 +344,14 @@ spec:
       //   }
       steps {
           sh 'npm install'
-          script{
-              if(currentBuild.changeSets.size() > 0) {
-                    changesCommit = 'TRUE'
-                }
-                else {
-                    changesCommit = 'FALSE'
-                }           
-            }
+          // script{
+          //     if(currentBuild.changeSets.size() > 0) {
+          //           changesCommit = 'TRUE'
+          //       }
+          //       else {
+          //           changesCommit = 'FALSE'
+          //       }           
+          //   }
           //sendNotificationSlack 'STARTED'
           //sendNotificationEmail 'STARTED',emailsList 
         }
