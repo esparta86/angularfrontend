@@ -357,6 +357,19 @@ spec:
         }
    }
 
+   stage('Lint') {
+      steps {
+         sh 'npm run lint'
+      }
+   }
+
+
+   stage('Unit Testing') {
+      steps {
+        sh 'npm run test'
+    }
+  }
+
  
 
 
@@ -389,18 +402,25 @@ spec:
 //      }
 
 
-   stage('Create & Publish Container') {
-       when {
-              expression { currentBuild.changeSets.size() > 0 }
-            }
+  stage('Build') {
       steps {
-            container('gcloud') {
-              sh "gcloud config set project ${project} "
-              //TI-CA-INFRASTRUCTURE  sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} --gcs-log-dir=gs://836514923182-cloudbuild-logs-cicd/logs/ ."
-              sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag}  ."
-            }
-           }
+        sh 'npm run build'
     }
+  }
+
+
+  //  stage('Create & Publish Container') {
+  //      when {
+  //             expression { currentBuild.changeSets.size() > 0 }
+  //           }
+  //     steps {
+  //           container('gcloud') {
+  //             sh "gcloud config set project ${project} "
+  //             //TI-CA-INFRASTRUCTURE  sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} --gcs-log-dir=gs://836514923182-cloudbuild-logs-cicd/logs/ ."
+  //             sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag}  ."
+  //           }
+  //          }
+  //   }
 
 
     
