@@ -317,7 +317,10 @@ pipeline {
                 - cat
                 tty: true
               - name: node
-                image: node:12-slim
+                image: node:latest
+                command:
+                - cat
+                tty: true
               #volumes:
               #- name: basic-cert
                 #secret:
