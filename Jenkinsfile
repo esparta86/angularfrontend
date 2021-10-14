@@ -39,7 +39,7 @@ def  imageContainerBase = "gcr.io/${project}/it-angular-app:v1"
 // @changesCommit boolean variable  that could be change to TRUE if there are changes in the branch
 def  changesCommit = 'FALSE'
 
-def  namePipeline = "angular-webapp-development"
+def  namePipeline = "unicomer-front"
 
 
 //@workspacePipeline Nothing to do here, it will store the complete path of workspace where the slave pod will clone the repository
@@ -47,7 +47,7 @@ def  workspacePipeline = "/home/jenkins/agent/workspace/${namePipeline}"
 
 //@emailsList It will store a list of recipients. If the Jenkins already configured in order to use the SMTP.
 // It wil send a report if the pipeline finished with sucess or not
-def  emailsList = 'lisandro.rafaelano@novatechdev.com'
+def  emailsList = 'debora.guardado@novatechdev.com'
 
 // @environment It will store the environment used 
 // environment name accepted :  production, testing and development
@@ -339,10 +339,11 @@ spec:
   stages {
   
    stage('Start'){
-      when {
-           expression { currentBuild.changeSets.size() > 0 }
-        }
+      // when {
+      //      expression { currentBuild.changeSets.size() > 0 }
+      //   }
       steps {
+          sh 'npm install'
           script{
               if(currentBuild.changeSets.size() > 0) {
                     changesCommit = 'TRUE'
@@ -351,7 +352,6 @@ spec:
                     changesCommit = 'FALSE'
                 }           
             }
-            sh 'npm install'
           //sendNotificationSlack 'STARTED'
           //sendNotificationEmail 'STARTED',emailsList 
         }
