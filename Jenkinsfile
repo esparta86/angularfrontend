@@ -317,7 +317,7 @@ pipeline {
                 - cat
                 tty: true
               - name: node
-                image: jnlp-agent-node
+                image: jenkins/jnlp-agent-node
                 command:
                 - cat
                 tty: true
