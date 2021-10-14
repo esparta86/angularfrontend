@@ -287,7 +287,7 @@ def sendNotificationEmail(String buildResult = 'STARTED',String emailsList) {
 pipeline {
    agent {
     kubernetes {
-      label 'angularwebapp-agent'
+      label 'unicomer-front-agent'
       defaultContainer 'jnlp'
       yaml """
             apiVersion: v1
@@ -418,18 +418,18 @@ pipeline {
   }
 
 
-  //  stage('Create & Publish Container') {
-  //      when {
-  //             expression { currentBuild.changeSets.size() > 0 }
-  //           }
-  //     steps {
-  //           container('gcloud') {
-  //             sh "gcloud config set project ${project} "
-  //             //TI-CA-INFRASTRUCTURE  sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} --gcs-log-dir=gs://836514923182-cloudbuild-logs-cicd/logs/ ."
-  //             sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag}  ."
-  //           }
-  //          }
-  //   }
+   stage('Create & Publish Container') {
+       when {
+              expression { currentBuild.changeSets.size() > 0 }
+            }
+      steps {
+            container('gcloud') {
+              sh "gcloud config set project ${project} "
+              //TI-CA-INFRASTRUCTURE  sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} --gcs-log-dir=gs://836514923182-cloudbuild-logs-cicd/logs/ ."
+              sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag}  ."
+            }
+           }
+    }
 
 
     
