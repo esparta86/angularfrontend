@@ -317,7 +317,7 @@ pipeline {
                 - cat
                 tty: true
               - name: node
-                image: node:12-slim
+                image: node:latest
                 command:
                 - cat
                 tty: true
@@ -347,7 +347,7 @@ pipeline {
       //      expression { currentBuild.changeSets.size() > 0 }
       //   }
       steps {
-          sh 'npm install'
+          sh '/usr/bin/npm npm install'
           // script{
           //     if(currentBuild.changeSets.size() > 0) {
           //           changesCommit = 'TRUE'
