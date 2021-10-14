@@ -285,8 +285,56 @@ def sendNotificationEmail(String buildResult = 'STARTED',String emailsList) {
 
 // Start the definition of pipeline
 pipeline {
-  agent {
-    docker { image 'node:12-slim' }
+   agent {
+    kubernetes {
+      label 'angularwebapp-agent'
+      defaultContainer 'jnlp'
+      yaml """
+            apiVersion: v1
+            kind: Pod
+            metadata:
+            labels:
+              component: ci
+            spec:
+              # Use service account that can deploy to all namespaces
+              # This service account is intern and it was created inside cluster
+              # Don't confuse with GCP SA
+              # serviceAccountName: cd-jenkins-sso -> Testing Cluster in ti-is-devenv-01
+              # serviceAccountName: jenkins-production-latest -> Production LEGACY Cluster in ti-ca-infrastructure
+              # serviceAccountName: is-jenkins-master         -> Production REGIONAL Cluster in ti-is-prodenv-01
+              serviceAccountName: main-jenkins
+              containers:
+              - name:  jnlp
+                tty: true  
+              - name: gcloud
+                image: gcr.io/cloud-builders/gcloud
+                command:
+                - cat
+                tty: true
+              - name: kubectl
+                image: gcr.io/cloud-builders/kubectl
+                command:
+                - cat
+                tty: true
+              #volumes:
+              #- name: basic-cert
+                #secret:
+                  #
+                  # This secrets stored the ca-certificates.crt. This files is the same that master jenkins has.
+                  # In master Jenkins POD in the path : /etc/ssl/certs/ca-certificates.crt 
+                  # First. Copy that file in your local folder
+                  #     Execute: kubectl cp production/{JENKINS_MASTER_POD_ID}:/etc/ssl/certs/ca-certificates.crt  /home/{YOUR_NETWORK_LOGIN}/{LOCAL_FOLDER}/ca-certificates.crt 
+                  # Next. Create the secret complete-cert-https if this secret is not exist.
+                  #     Execute: kubectl create secret generic complete-cert-https --from-file=ca-certificates.crt -n production
+                  #
+                  # NOTE: This secret helps to Jenkins's slaves to have access to https://isgit.telusinternational.com/ in order to avoid the message error
+                  #  stderr: fatal: unable to access https://isgit.telusinternational.com/data_integration/lrt.git/ : SSL certificate problem: unable to get issuer certificate
+                  #secretName: complete-cert-https              -> Testing   Cluster in ti-is-devenv-01   
+                  #secretName: basic-cert-https                 -> Production LEGACY Cluster in ti-ca-infrastructure
+                  #secretName: complete-cert-https-slave-jenkis -> Production REGIONAL Cluster in ti-is-prodenv-01
+                  #secretName: complete-cert-https
+            """
+    }
   }
   stages {
    stage('Start'){
