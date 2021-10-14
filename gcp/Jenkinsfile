@@ -406,11 +406,11 @@ spec:
 
   }
   
-    post {
-        always {
-	         // sendNotificationSlack currentBuild.currentResult
-           // sendNotificationEmail currentBuild.currentResult,emailsList
-        }
+    // post {
+    //     always {
+	//          // sendNotificationSlack currentBuild.currentResult
+    //        // sendNotificationEmail currentBuild.currentResult,emailsList
+    //     }
        
-    }
+    // }
 }
