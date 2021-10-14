@@ -83,8 +83,8 @@ def namespace = "{NAMESPACE}"
 // this stores a custom mvnseeting.xml in order to access to our Nexus server if you need to dowload from a repository.
 // Maven Docker Images available in each projet.
 // gcr.io/devops8687/is-maven-3-6-jdk8:v1
-def imageContainerBaseM = "gcr.io/devops8687/is-maven-3-6-jdk8:v1"
-def nameImageM = "node:latest"
+def imageContainerBaseM = "gcr.io/devops8687/it-angular-app:gcp.4"
+def nameImageM = "it-angular-app"
 
 //@projectKey It will store  the project name if you will need scan the repository in SonarQube Server
 // http://172.25.29.38:8080
