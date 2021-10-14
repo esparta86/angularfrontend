@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "devops8687",
+  "private_key_id": "70c1c3ae130aead3f164267010edbad7324c2587",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDA6Qy1prhlIV4M\nCz6HJ0aI5P6ApUuOIZ8SPuNQclghXd/qIwA+RRHwbfdUVjmb/iC2b4LBqu/JTzwE\nGx8F6y9RDyQ1rwvquVeY24En/VE6McDajYxEDN51xvyTR9HXz7lmcitJxuV2sxpV\nN5oMg0zI2tLdDGfrjPhSNPV5HaCE9t93Ns6BN/nbjKGZjXCga3beNDlei+KoluDT\nQ0M+Je5Ado4PSjcfEkVOkYKSYidFSsEwwu7GhDlOJ7gymN8lcFTtWPfQdXwIlcaH\ntfIIOwcxMFDGnquhXCiCPd1lhcEj3iiILfs3WnG1hwDyuqs4H7Cs3xIx7j36zpzY\nFS+oCKF7AgMBAAECggEAEWPw9V82OEetxsAsvtpXjXe3Sbmc+g8l2+s3asUkFL31\ntZG6L+LiHx6KsVukjd9263tZ+kOCok82Rdh8D3iIJ3KJ/RzuohZbQzhmiEhZzjk1\n/X3NK0VNuKhblJtg22eqewXHyTrY7L5wnUYJ6R7dCS5Q3ASGScHHkQGdL3HwSowe\npkD1fnDhSZ82Mr5rQ1GdjY+cGt+BDacIgSjChVpiMV3QX2z8Q/FWGw9Vb5IvXbMa\nOZGAINGTFZf3yc7bd2zIkEdkQ3Y2j+YswLQEKoBPlS+oOi1iTLESShK52brfaICD\nt+RbP1czF0+oR0lu7ayMKyI14f1iCbmPuvyxuS8pQQKBgQDuftR1XntWxeLPqHk6\n8FUc3s4Fy1+JzMi27YxTe9etGc0o8Tnpw+hgqcmzrxQf7nlCKGwvPzVneuUgpho1\nKtKd5d+Mjl2MVS3DXlU8CR4zTrQ43PNGfAwIkTtaRb3cSpmBoDwFtoTLFJtpLoo5\ncUKGJZFMRBKh2WUGyhNZE9jH4wKBgQDPEbTciqDqu4NZkeWr/jfwTjYeUl3ryZo/\nCNg6iyY8e2q/4rpYwVsHSpbowrx7eK7VqmizS5xMv4rO74WKroQQPsRFhe3ndomb\n6LHJ/jmuunrRow6EFLN71yP3lAzT49gkM69ENKOgzNNYYBtgT0r5UXhd7QXmWhta\nlKlpefoDiQKBgGx2l88M+hDbjCwelYu9cyffGFlARaHY1UuEOzZYcxzRSCGfm1P5\n+bvEW+vw6rke7lytH45ZM8Ns+7lecTrOz9xph8JXmKnSry5Tv3W/O9HfsEzQB399\nuMdIrXJ/lzoRX0C5i7KZcEkfhRJPzSMUpEl32l2R89tRkAWHb0cqpIM7AoGAHAaD\neg3xNZPndSn/8cVYgNe1D2mKeK0yiTGDQnku1aTGj+351qVk0pnPzvT8WaG92AFW\nZl3na6PI/7T/WAPCsAguvFIiHt+2RDm8RmB4IiPvF4yAHHRIzowRvCJ3kf4WdN/h\n6tNNCihuullXmzNgLFpQdjXsRH8RkLLqMvJlWjECgYAaq1nr7aJAgMgS8zXoqnhp\ncbFzb492b9xr7dBhr8adEwBLxlWoHGeyV5WryZ0UtFezKDEg1CmXl9zh4Mqk3Er2\nvz83e1c42XejqOKDFzj2+9Ulkx0I8KWkw2T9BBoNGFq4P4fW9wiQNlO18drUFYaW\nEKd4MVzdQAPzYkxJ2KkAng==\n-----END PRIVATE KEY-----\n",
+  "client_email": "angular-app-storage@devops8687.iam.gserviceaccount.com",
+  "client_id": "115127801192440933519",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/angular-app-storage%40devops8687.iam.gserviceaccount.com"
+}
