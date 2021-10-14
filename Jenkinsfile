@@ -316,6 +316,8 @@ pipeline {
                 command:
                 - cat
                 tty: true
+              - name: node
+                image: node:12-slim
               #volumes:
               #- name: basic-cert
                 #secret:
@@ -341,9 +343,6 @@ pipeline {
       // when {
       //      expression { currentBuild.changeSets.size() > 0 }
       //   }
-      agent {
-        docker { image 'node:latest' }
-      }
       steps {
           sh 'npm install'
           // script{
