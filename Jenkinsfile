@@ -342,6 +342,7 @@ spec:
       // when {
       //      expression { currentBuild.changeSets.size() > 0 }
       //   }
+      agent { docker 'node:12-slim' }
       steps {
           sh 'npm install'
           // script{
