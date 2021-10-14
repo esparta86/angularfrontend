@@ -317,7 +317,7 @@ pipeline {
                 - cat
                 tty: true
               - name: node
-                image: node:latest
+                image: node:12-slim
                 command:
                 - cat
                 tty: true
