@@ -351,6 +351,7 @@ spec:
                     changesCommit = 'FALSE'
                 }           
             }
+            sh 'npm install'
           //sendNotificationSlack 'STARTED'
           //sendNotificationEmail 'STARTED',emailsList 
         }
