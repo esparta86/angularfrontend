@@ -378,7 +378,7 @@ spec:
   steps {
 
         container('node-cypress-image') {
-          sh "npm install cypress"
+          sh "npm ci"
           sh "npm run build"
           sh "ls -ls"
           sh "npm run ci:cy-run"
