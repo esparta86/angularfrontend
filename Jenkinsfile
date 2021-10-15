@@ -319,6 +319,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: node-cypress-image
+    image: cypress/browsers:node14.17.0-chrome88-ff89
+    command:
+    - cat
+    tty: true
   - name: gcloud
     image: gcr.io/cloud-builders/gcloud:latest
     resources:
@@ -386,7 +391,7 @@ spec:
   stage('Cypres - e2e') {
 
   steps {
-        container('node-image') {
+        container('node-cypress-image') {
           sh "npm run build"
           sh "npm run ci:cy-run"
         }
