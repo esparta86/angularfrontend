@@ -320,7 +320,7 @@ spec:
     - cat
     tty: true
   - name: node-cypress-image
-    image: cypress/browsers:node14.17.0-chrome88-ff89
+    image: cypress/base:14
     command:
     - cat
     tty: true
@@ -391,6 +391,7 @@ spec:
   stage('Cypres - e2e') {
 
   steps {
+    sleep 600
         container('node-cypress-image') {
           sh "npm run build"
           sh "npm run ci:cy-run"
