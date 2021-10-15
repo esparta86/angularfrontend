@@ -350,7 +350,7 @@ spec:
   stage('Lint + Jest') {
 
     steps {
-          container('node-image') {
+          container('node-cypress-image') {
             sh "npm install"
             sh "npm run lint"
             sh "npm run test"
@@ -377,10 +377,10 @@ spec:
 
   steps {
 
-        container('node-image') {
-          sh "ls -ls"
+        container('node-cypress-image') {
           sh "npm install cypress"
           sh "npm run build"
+          sh "ls -ls"
           sh "npm run ci:cy-run"
         }
         sleep 5
