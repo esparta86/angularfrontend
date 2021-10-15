@@ -320,7 +320,7 @@ spec:
     - cat
     tty: true
   - name: node-cypress-image
-    image: cypress/browsers:chrome69
+    image: cypress/base:14.17.3
     command:
     - cat
     tty: true
@@ -345,11 +345,6 @@ spec:
       limits:
         cpu: 200m
         memory: 200Mi    
-    command:
-    - cat
-    tty: true
-  - name: node
-    image: node:latest
     command:
     - cat
     tty: true
@@ -380,7 +375,7 @@ spec:
 
     steps {
           container('node-image') {
-            sh "npm ci"
+            sh "npm install"
             sh "npm run lint"
             sh "npm run test"
           }
@@ -391,7 +386,7 @@ spec:
   stage('Cypres - e2e') {
 
   steps {
-    sleep 600
+
         container('node-cypress-image') {
           sh "npm run build"
           sh "npm run ci:cy-run"
