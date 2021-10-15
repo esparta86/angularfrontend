@@ -375,7 +375,7 @@ spec:
 
     steps {
           container('node-image') {
-            sh "npm install"
+            sh "npm ci"
             sh "npm run lint"
             sh "npm run test"
           }
