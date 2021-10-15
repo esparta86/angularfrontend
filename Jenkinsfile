@@ -315,7 +315,7 @@ spec:
       - cat
     tty: true
   - name: node-image
-    image: node:latest
+    image: node:14.18.1-slim
     command:
     - cat
     tty: true
