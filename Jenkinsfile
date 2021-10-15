@@ -314,6 +314,11 @@ spec:
     command:
       - cat
     tty: true
+  - name: node-image
+    image: node:latest
+    command:
+    - cat
+    tty: true
   - name: gcloud
     image: gcr.io/cloud-builders/gcloud:latest
     resources:
@@ -349,7 +354,9 @@ spec:
   stages {
   
    stage('Start'){
-
+      when {
+           expression { currentBuild.changeSets.size() > 0 }
+        }
       steps {
           script{
               if(currentBuild.changeSets.size() > 0) {
@@ -364,37 +371,29 @@ spec:
         }
    }
 
-   stage('Install Dependencies') {
-      steps {
-         sh 'npm install'
-      }
-   }
+  stage('Lint + Jest') {
 
-     stage('Lint') {
-      steps {
-         sh 'npm run lint'
-      }
-   }
-
-   stage('Unit Testing') {
-      steps {
-        sh 'npm run test'
+    steps {
+          container('node-image') {
+            sh "npm install"
+            sh "npm run lint"
+            sh "npm run test"
+          }
+          sleep 5
     }
   }
+
+  stage('Cypres - e2e') {
+
+  steps {
+        container('node-image') {
+          sh "npm run build"
+          sh "npm run ci:cy-run"
+        }
+        sleep 5
+        }
+  }    
   
-  stage('SonarQube Analysis') {
-        when {
-           expression { currentBuild.changeSets.size() > 0 }
-        }
-        steps{
-          script  {
-                  sonarqubeScannerHome = tool 'sonarqub-scanner';
-                  }
-              withSonarQubeEnv('SonarIS') {
-                sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.java.binaries=${workspacePipeline}/${binaries} -Dsonar.java.source=${javaVersion} -Dsonar.host.url=http://172.25.29.38:8080 -Dsonar.login=${tokenSonar} -Dsonar.exclusions=${workspacePipeline}/conf/,${workspacePipeline}/lib/ -Dsonar.sourceEncoding=UTF-8"
-              }
-        }
-	  }
 
 //    stage('SonarQube Quality Gate') {
 //        when {
@@ -410,23 +409,16 @@ spec:
 //          }
 //      }
 
-     stage('Build') {
-      steps {
-        sh 'npm run build'
-    }
-  }
+  //  stage('Create & Publish Container') {
 
-
-   stage('Create & Publish Container') {
-
-      steps {
-            container('gcloud') {
-              sh "gcloud config set project ${project} "
-              sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag}  ."
-            }
-            sleep 30
-           }
-    }
+  //     steps {
+  //           container('gcloud') {
+  //             sh "gcloud config set project ${project} "
+  //             sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag}  ."
+  //           }
+  //           sleep 30
+  //          }
+  //   }
 
     
 
