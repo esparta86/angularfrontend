@@ -311,7 +311,12 @@ spec:
     image: cypress/browsers:node14.17.0-chrome88-ff89
     command:
     - cat
-    tty: true
+    tty: true 
+  - name: sonarqube
+    image:  sonarsource/sonar-scanner-cli:4
+    command:
+    - cat
+    tty: true 
   - name: gcloud
     image: gcr.io/cloud-builders/gcloud:latest
     resources:
@@ -387,6 +392,14 @@ spec:
         }
   } 
   
+stage('SonarQube Quality Gate') {
+
+  steps {
+        container('sonarqube') {
+          sh "ls -ls"
+        }
+        }
+} 
 
 //    stage('SonarQube Quality Gate') {
 //        when {
