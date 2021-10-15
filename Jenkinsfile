@@ -320,7 +320,7 @@ spec:
     - cat
     tty: true
   - name: node-cypress-image
-    image: cypress/base:14
+    image: cypress/base:14.18.1
     command:
     - cat
     tty: true
