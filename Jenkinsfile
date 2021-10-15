@@ -308,7 +308,7 @@ spec:
     - cat
     tty: true
   - name: node-cypress-image
-    image: cypress/base:14.17.3
+    image: cypress/browsers:node14.17.0-chrome88-ff89
     command:
     - cat
     tty: true
