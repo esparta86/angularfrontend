@@ -280,7 +280,7 @@ def sendNotificationEmail(String buildResult = 'STARTED',String emailsList) {
 pipeline {
    agent {
     kubernetes {
-      label '{SLAVE_NAME}'
+      label 'webapp-angular'
       slaveConnectTimeout 200
       defaultContainer 'jnlp'
       yaml """
@@ -301,18 +301,6 @@ spec:
     effect: "NoSchedule"
   containers:
   - name: jnlp
-    tty: true  
-  - name:  ${nameImageM}
-    image: ${imageContainerBaseM}
-    resources:
-      requests:
-        cpu: 200m
-        memory: 200Mi
-      limits:
-        cpu: 200m
-        memory: 200Mi    
-    command:
-      - cat
     tty: true
   - name: node-image
     image: node:14.18.1-slim
@@ -332,18 +320,6 @@ spec:
         memory: 200Mi
       limits:
         cpu: 100m
-        memory: 200Mi    
-    command:
-    - cat
-    tty: true
-  - name: kubectl
-    image: gcr.io/cloud-builders/kubectl:latest
-    resources:
-      requests:
-        cpu: 200m
-        memory: 200Mi
-      limits:
-        cpu: 200m
         memory: 200Mi    
     command:
     - cat
@@ -388,6 +364,7 @@ spec:
   steps {
 
         container('node-cypress-image') {
+          sh "ls -ls"
           sh "npm run build"
           sh "npm run ci:cy-run"
         }
