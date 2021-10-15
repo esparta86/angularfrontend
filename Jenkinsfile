@@ -163,7 +163,7 @@ def sendNotificationEmail(String buildResult = 'STARTED',String emailsList) {
   def detail = """${buildResult} : Integration Job '${env.JOB_NAME} Build# [$env.BUILD_NUMBER]':
 				    New changes is coming, please check console output at '${env.BUILD_URL}   ${env.JOB_NAME}  [${env.BUILD_NUMBER}] """
   
-  body: """ <title>${env.JOB_NAME}</title>
+  emailext body: """ <title>${env.JOB_NAME}</title>
       <STYLE>
           body table, td, th, p, h1, h2 {
           margin:0;
@@ -417,11 +417,11 @@ spec:
 
   }
   
-    post {
-        always {
-	         // sendNotificationSlack currentBuild.currentResult
-            sendNotificationEmail currentBuild.currentResult,emailsList
-        }
+    // post {
+    //     always {
+	  //        // sendNotificationSlack currentBuild.currentResult
+    //         sendNotificationEmail currentBuild.currentResult,emailsList
+    //     }
        
-    }
+    // }
 }
