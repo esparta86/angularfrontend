@@ -370,7 +370,22 @@ spec:
         }
         sleep 5
         }
-  }    
+  }   
+
+
+  stage('Cypres - e2e') {
+
+  steps {
+
+        container('node-image') {
+          sh "ls -ls"
+          sh "npm install cypress"
+          sh "npm run build"
+          sh "npm run ci:cy-run"
+        }
+        sleep 5
+        }
+  } 
   
 
 //    stage('SonarQube Quality Gate') {
