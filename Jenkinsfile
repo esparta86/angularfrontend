@@ -359,18 +359,18 @@ spec:
     }
   }
 
-  stage('Cypres - e2e') {
+  // stage('Cypres - e2e') {
 
-  steps {
+  // steps {
 
-        container('node-cypress-image') {
-          sh "ls -ls"
-          sh "npm run build"
-          sh "npm run ci:cy-run"
-        }
-        sleep 5
-        }
-  }   
+  //       container('node-cypress-image') {
+  //         sh "ls -ls"
+  //         sh "npm run build"
+  //         sh "npm run ci:cy-run"
+  //       }
+  //       sleep 5
+  //       }
+  // }   
 
 
   stage('Cypres - e2e') {
