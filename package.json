@@ -13,7 +13,7 @@
     "ci:start-server": "angular-http-server --path ./dist/unicomerFront -p 4200",
     "ci:cy-run": "start-server-and-test ci:start-server http://localhost:4200 cypress:run",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --headless --browser chrome  --record --key JRswpvoaJWsvLQgx"
+    "cypress:run": "cypress run --headless --browser chrome"
   },
   "private": true,
   "dependencies": {
