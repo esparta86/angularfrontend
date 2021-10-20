@@ -385,10 +385,10 @@ stage('SonarQube Analysis') {
   steps {
         container('sonarqube') {
          script  {
-                  sonarqubeScannerHome = tool '/opt/sonar-scanner';
+                  sonarqubeScannerHome = tool 'sonarqub-scanner';
                   }
               withSonarQubeEnv('SonarIS') {
-                bat "./sonar-scanner.bat -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=${url} -Dsonar.login=${tokenSonar}"
+                sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=${url} -Dsonar.login=${tokenSonar}"
               }
         }
   }
