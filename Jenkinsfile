@@ -388,7 +388,7 @@ stage('SonarQube Analysis') {
                   sonarqubeScannerHome = tool '/opt/sonar-scanner';
                   }
               withSonarQubeEnv('SonarIS') {
-                sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=${url} -Dsonar.login=${tokenSonar}"
+                bat "./sonar-scanner.bat -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=${url} -Dsonar.login=${tokenSonar}"
               }
         }
   }
