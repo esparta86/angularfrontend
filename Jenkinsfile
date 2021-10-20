@@ -335,7 +335,7 @@ spec:
 }
   }
   stages {
-/* 
+  
    stage('Start'){
       when {
            expression { currentBuild.changeSets.size() > 0 }
@@ -354,32 +354,32 @@ spec:
         }
    }
 
-  stage('Lint + Jest') {
+  // stage('Lint + Jest') {
 
-    steps {
-          container('node-cypress-image') {
-            sh "npm install"
-            sh "npm run lint"
-            sh "npm run test"
-          }
-          sleep 5
-    }
-  }
+  //   steps {
+  //         container('node-cypress-image') {
+  //           sh "npm install"
+  //           sh "npm run lint"
+  //           sh "npm run test"
+  //         }
+  //         sleep 5
+  //   }
+  // }
 
- stage('Cypres - e2e') {
+  // stage('Cypres - e2e') {
 
-  steps {
+  // steps {
 
-        container('node-cypress-image') {
-          sh "npm ci"
-          sh "npm run build"
-          sh "ls -ls"
-          sh "npm run ci:cy-run"
-        }
-        sleep 5
-        }
-  } 
-*/
+  //       container('node-cypress-image') {
+  //         sh "npm ci"
+  //         sh "npm run build"
+  //         sh "ls -ls"
+  //         sh "npm run ci:cy-run"
+  //       }
+  //       sleep 5
+  //       }
+  // } 
+
   
 stage('SonarQube Analysis') {
   steps {
@@ -393,4 +393,15 @@ stage('SonarQube Analysis') {
         }
   }
 } 
+    
+
+  }
+  
+    // post {
+    //     always {
+	  //        // sendNotificationSlack currentBuild.currentResult
+    //         sendNotificationEmail currentBuild.currentResult,emailsList
+    //     }
+       
+    // }
 }
