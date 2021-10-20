@@ -39,7 +39,7 @@ def  changesCommit = 'FALSE'
 
 
 // def  namePipeline = "web-app-ti-is-devenv-external"
-def  namePipeline = "{PIPELINE_NAME}"
+def  namePipeline = "unicomer-front"
 
 
 //@workspacePipeline Nothing to do here, it will store the complete path of workspace where the slave pod will clone the repository
@@ -89,12 +89,14 @@ def nameImageM = "it-angular-app"
 //@projectKey It will store  the project name if you will need scan the repository in SonarQube Server
 // http://172.25.29.38:8080
 // 
-//def projectKey = "{PROJECTKEY}"
+def projectKey = "unicomerFront"
 //@source PATH java files
 //def sources = "src-app/src/main/java"
-//def binaries = "src-app/target/classes"
-//def javaVersion = "1.8"
-//def tokenSonar = "d3142e0782984dc107c4820881a00f82c51cea71"
+def binaries = "src-app/target/classes"
+def javaVersion = "1.8"
+def tokenSonar = "41deb25d1f4f533b039c1710f0cb00b1896175be"
+//@sources PATH
+def sources = "unicomerFront"
 
 
 //@warname defined of pom.xml
@@ -333,7 +335,7 @@ spec:
 }
   }
   stages {
-  
+/* 
    stage('Start'){
       when {
            expression { currentBuild.changeSets.size() > 0 }
@@ -364,21 +366,7 @@ spec:
     }
   }
 
-  // stage('Cypres - e2e') {
-
-  // steps {
-
-  //       container('node-cypress-image') {
-  //         sh "ls -ls"
-  //         sh "npm run build"
-  //         sh "npm run ci:cy-run"
-  //       }
-  //       sleep 5
-  //       }
-  // }   
-
-
-  stage('Cypres - e2e') {
+ stage('Cypres - e2e') {
 
   steps {
 
@@ -391,50 +379,18 @@ spec:
         sleep 5
         }
   } 
+*/
   
-stage('SonarQube Quality Gate') {
-
+stage('SonarQube Analysis') {
   steps {
         container('sonarqube') {
-          sh "ls -ls"
+         script  {
+                  sonarqubeScannerHome = tool 'scanner-cli:scanner-cli';
+                  }
+              withSonarQubeEnv('SonarIS') {
+                bat "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=${url} -Dsonar.login=${tokenSonar}"
+              }
         }
-        }
-} 
-
-//    stage('SonarQube Quality Gate') {
-//        when {
-//             expression { currentBuild.changeSets.size() > 0 }
-//          }
-//          steps{
-//             script  {
-//                def qualitygate = waitForQualityGate()
-//                 if (qualitygate.status == "ERROR"  ) {
-//                    error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-//                 }
-//             }
-//          }
-//      }
-
-  //  stage('Create & Publish Container') {
-
-  //     steps {
-  //           container('gcloud') {
-  //             sh "gcloud config set project ${project} "
-  //             sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag}  ."
-  //           }
-  //           sleep 30
-  //          }
-  //   }
-
-    
-
   }
-  
-    // post {
-    //     always {
-	  //        // sendNotificationSlack currentBuild.currentResult
-    //         sendNotificationEmail currentBuild.currentResult,emailsList
-    //     }
-       
-    // }
+} 
 }
