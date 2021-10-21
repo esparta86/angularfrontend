@@ -354,34 +354,19 @@ spec:
         }
    }
 
-  // stage('Lint + Jest') {
+  stage('Lint') {
 
-  //   steps {
-  //         container('node-cypress-image') {
-  //           sh "npm install"
-  //           sh "npm run lint"
-  //           sh "npm run test"
-  //         }
-  //         sleep 5
-  //   }
-  // }
+    steps {
+          container('node-cypress-image') {
+            sh "npm install"
+            sh "npm run lint"
+            sh "npm run test"
+          }
+          sleep 5
+    }
+  }
 
-  // stage('Cypres - e2e') {
-
-  // steps {
-
-  //       container('node-cypress-image') {
-  //         sh "npm ci"
-  //         sh "npm run build"
-  //         sh "ls -ls"
-  //         sh "npm run ci:cy-run"
-  //       }
-  //       sleep 5
-  //       }
-  // } 
-
-  
-stage('SonarQube Analysis') {
+  stage('Code review - SonarQube') {
   steps {
        sleep 300;
         container('sonarqube') {
@@ -392,6 +377,31 @@ stage('SonarQube Analysis') {
         }
   }
 } 
+
+  stage('Unit Testing') {
+
+    steps {
+          container('node-cypress-image') {
+            sh "npm run test"
+          }
+          sleep 5
+    }
+  }
+
+
+  stage('e2e') {
+
+  steps {
+
+        container('node-cypress-image') {
+          sh "npm ci"
+          sh "npm run build"
+          sh "ls -ls"
+          sh "npm run ci:cy-run"
+        }
+        sleep 5
+        }
+  } 
     
 
   }
