@@ -13,7 +13,7 @@ export class LoginComponent {
     var test2 = 3;
     this.func1();
     this.func2();
-    this.deleteFuunction();
+    this.deleteFuunction("test");
     this.test();
   }
 
@@ -41,7 +41,7 @@ export class LoginComponent {
 }
 
 
-  deleteFuunction() {
+  deleteFuunction(prueba:string) {
     var myArray = ['a', 'b', 'c', 'd'];
 
     delete myArray[2];  // Noncompliant. myArray => ['a', 'b', undefined, 'd']
