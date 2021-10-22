@@ -11,6 +11,10 @@ export class LoginComponent {
     let test = 2;
     const lest2 = 2;
     var test2 = 3;
+    this.func1();
+    this.func2();
+    this.deleteFuunction();
+    this.test();
   }
 
 
