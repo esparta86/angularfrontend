@@ -304,11 +304,6 @@ spec:
   containers:
   - name: jnlp
     tty: true
-  - name: node-image
-    image: node:14.18.1-slim
-    command:
-    - cat
-    tty: true
   - name: node-cypress-image
     image: cypress/browsers:node14.17.0-chrome88-ff89
     command:
