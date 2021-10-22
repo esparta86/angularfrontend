@@ -91,12 +91,12 @@ def nameImageM = "it-angular-app"
 // 
 def projectKey = "unicomerFront"
 //@source PATH java files
-//def sources = "src-app/src/main/java"
+def sources = "src/app"
 def binaries = "src-app/target/classes"
 def javaVersion = "1.8"
 def tokenSonar = "41deb25d1f4f533b039c1710f0cb00b1896175be"
 //@sources PATH
-def sources = "unicomerFront"
+//def sources = "unicomerFront"
 
 
 //@warname defined of pom.xml
@@ -367,16 +367,15 @@ spec:
   }
 
   stage('Code review - SonarQube') {
-  steps {
-       sleep 300;
-        container('sonarqube') {
-        
-                sh "ls  /usr/bin/"
-                // sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=${url} -Dsonar.login=${tokenSonar}"
-              
-        }
-  }
-} 
+      steps {
+           script  {
+                  sonarqubeScannerHome = tool 'sonarqub-scanner';
+                  }
+              withSonarQubeEnv('SonarIS') {
+                sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=http://34.72.176.3:9000/ -Dsonar.login=${tokenSonar} -Dsonar.sourceEncoding=UTF-8"
+              }    
+      }
+  } 
 
   stage('Unit Testing') {
 
