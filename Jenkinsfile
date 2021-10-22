@@ -347,8 +347,6 @@ spec:
                     changesCommit = 'FALSE'
                 }           
             }
-          //sendNotificationSlack 'STARTED'
-          //sendNotificationEmail 'STARTED',emailsList 
         }
    }
 
