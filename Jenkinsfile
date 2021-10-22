@@ -334,7 +334,7 @@ spec:
 """
 }
   }
-  tools:{
+  tools {
     nodejs 'nodejs-unicomer'
   }
   stages {
