@@ -368,6 +368,18 @@ spec:
       }
   } 
 
+   stage('SonarQube Quality Gate') {
+
+         steps{
+            script  {
+               def qualitygate = waitForQualityGate()
+                if (qualitygate.status == "ERROR"  ) {
+                   error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+                }
+            }
+         }
+     }
+
   stage('Lint') {
 
     steps {
