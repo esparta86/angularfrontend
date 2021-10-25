@@ -416,7 +416,7 @@ spec:
     stage('Build/Push docker image'){
       steps{
             container('gcloud'){
-             
+                sh "ls -lh"
                 
                 sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} --gcs-log-dir=gs://157582299266-cloudbuild-logs-cicd/ ."
               
