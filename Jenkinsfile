@@ -329,9 +329,9 @@ spec:
 """
 }
   }
-  tools {
-    nodejs 'nodejs-unicomer'
-  }
+  // tools {
+  //   nodejs 'nodejs-unicomer'
+  // }
   stages {
   
    stage('Start'){
@@ -416,10 +416,10 @@ spec:
     stage('Build/Push docker image'){
       steps{
             container('gcloud'){
-              stage('BUILD'){
-                sh "npm list"
+             
+                
                 sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} --gcs-log-dir=gs://157582299266-cloudbuild-logs-cicd/ ."
-              }
+              
             }
       }
     }
