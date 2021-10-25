@@ -363,34 +363,34 @@ spec:
   // } 
 
 
-     stage('Code review - SonarQube') {
-      steps {
-           container('node-cypress-image'){
-             sh "npm install"
-             sh "npm run sonar-scanner"
-           }   
-      }
-  } 
+  //    stage('Code review - SonarQube') {
+  //     steps {
+  //          container('node-cypress-image'){
+  //            sh "npm install"
+  //            sh "npm run sonar-scanner"
+  //          }   
+  //     }
+  // } 
 
 
 
 
-   stage('SonarQube Quality Gate') {
-         steps{
-            script  {
-               def qualitygate = waitForQualityGate()
-                if (qualitygate.status == "ERROR"  ) {
-                   error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-                }
-            }
-         }
-     }
+  //  stage('SonarQube Quality Gate') {
+  //        steps{
+  //           script  {
+  //              def qualitygate = waitForQualityGate()
+  //               if (qualitygate.status == "ERROR"  ) {
+  //                  error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+  //               }
+  //           }
+  //        }
+  //    }
 
   stage('Lint') {
 
     steps {
           container('node-cypress-image') {
-            // sh "npm install"
+           sh "npm install"
             sh "npm run lint"
             sh "npm run test"
           }
@@ -400,15 +400,15 @@ spec:
 
  
 
-  stage('Unit Testing') {
+  // stage('Unit Testing') {
 
-    steps {
-          container('node-cypress-image') {
-            sh "npm run test"
-          }
-          sleep 5
-    }
-  }
+  //   steps {
+  //         container('node-cypress-image') {
+  //           sh "npm run test"
+  //         }
+  //         sleep 5
+  //   }
+  // }
 
 
   stage('e2e') {
