@@ -363,7 +363,7 @@ spec:
                   sonarqubeScannerHome = tool 'sonarqub-scanner';
                   }
               withSonarQubeEnv('SonarUnicomer') {
-                sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=http://34.72.176.3:9000 -Dsonar.login=${tokenSonar} -Dsonar.sourceEncoding=UTF-8"
+                sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=http://34.72.176.3:9000 -Dsonar.login=${tokenSonar} -Dsonar.sourceEncoding=UTF-8 -Dsonar.typescript.tsconfigPath=tsconfig.json"
               }    
       }
   } 
