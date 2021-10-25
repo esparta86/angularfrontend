@@ -362,6 +362,19 @@ spec:
   //     }
   // } 
 
+
+     stage('Code review - SonarQube') {
+      steps {
+           container('node-cypress-image'){
+             sh "npm install"
+             sh "npm run sonar-scanner"
+           }   
+      }
+  } 
+
+
+
+
   //  stage('SonarQube Quality Gate') {
   //        steps{
   //           script  {
@@ -413,16 +426,16 @@ spec:
   } 
 
 
-    stage('Build/Push docker image'){
-      steps{
-            container('gcloud'){
-                sh "ls -lh"
+    // stage('Build/Push docker image'){
+    //   steps{
+    //         container('gcloud'){
+    //             sh "ls -lh"
                 
-                sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} --gcs-log-dir=gs://157582299266-cloudbuild-logs-cicd/ ."
+    //             sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} --gcs-log-dir=gs://157582299266-cloudbuild-logs-cicd/ ."
               
-            }
-      }
-    }
+    //         }
+    //   }
+    // }
 
   }
   
