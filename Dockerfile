@@ -19,31 +19,33 @@
 #gcloud builds submit -t gcr.io/ti-is-devenv-01/is-rendered:v3 --gcs-log-dir=gs://ti-is-devenv-01_cloudbuild_custom_logs_cicd/logs/ .
 
 #gcloud builds submit -t gcr.io/esparta86project/angularapp:v1 .  --gcs-log-dir=gs://ti-is-devenv-01_cloudbuild_custom_logs_cicd/logs/ .
-FROM node:12-slim as build-step
+# FROM node:12-slim as build-step
 
-# Create and change to the app directory.
-WORKDIR /usr/src/app
+# # Create and change to the app directory.
+# WORKDIR /usr/src/app
 
-# Copy application dependency manifests to the container image.
-# A wildcard is used to ensure both package.json AND package-lock.json are copied.
-# Copying this separately prevents re-running npm install on every code change.
-COPY package*.json ./
+# # Copy application dependency manifests to the container image.
+# # A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# # Copying this separately prevents re-running npm install on every code change.
+# COPY package*.json ./
 
-# Install production dependencies.
-RUN npm install 
+# # Install production dependencies.
+# RUN npm install 
 
 
 
 # Copy local code to the container image.
-COPY . ./
+# COPY . ./
 
-RUN npm install @angular/cli 
+# RUN npm install @angular/cli 
 
 
-RUN npm run build
+# RUN npm run build
 
 
 
 FROM nginx:1.17.1-alpine
 
 COPY --from=build-step /usr/src/app/dist /usr/share/nginx/html
+
+COPY dist/ /usr/share/nginx/html
