@@ -48,4 +48,4 @@ FROM nginx:1.17.1-alpine
 
 #COPY --from=build-step /usr/src/app/dist /usr/share/nginx/html
 
-ADD dist /usr/share/nginx/html
+COPY distinto /usr/share/nginx/html
