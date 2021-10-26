@@ -14,7 +14,7 @@
     "ci:cy-run": "start-server-and-test ci:start-server http://localhost:4200 cypress:run",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --headless --browser chrome",
-    "sonar-scanner": "sonar-scanner -Dsonar.qualitygate.wait=true"
+    "sonar-scanner": "sonar-scanner "
   },
   "private": true,
   "dependencies": {
