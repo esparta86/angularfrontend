@@ -31,7 +31,7 @@ def  imageTag = "gcr.io/${project}/${appNameI}:${branchName}.${env.BUILD_NUMBER}
 // this value have to be the same in the deployment file in the image property. 
 // this value is helpful in order to find that and replace with the new docker image name stored in imageTag (How to do that ? check out stage('Deploy ') )
 //def  imageContainerBase = "gcr.io/${project}/glogger-web-app:v1"
-def  imageContainerBase = "gcr.io/${project}/{DOCKER-IMAGE}:v#"
+def  imageContainerBase = "gcr.io/devops8687/frontendweb:develop.95"
 
 
 // @changesCommit boolean variable  that could be change to TRUE if there are changes in the branch
@@ -69,7 +69,7 @@ def  environment = "{ENVIRONMENT}"
 //def secretCredentials = "k8s/volumen/secrets/${environment}/cloudsql-db-credentials-applicationname.yaml"
 //def configmapBucketSA = "k8s/volumen/Configmap/${environment}/configmapBucketSA.yaml"
 //def configmapSettings = "k8s/volumen/Configmap/${environment}/configmapSettings-appname.yaml"
-//def deploymentApp = "k8s/Deployment/${environment}/deployment.yaml"
+def deploymentApp = "k8s/Deployment/deployment.yaml"
 
 //@namespace It will store the namespace where you are going to use in order to deploy your applications/
 // available namespace in Testing Cluster
@@ -77,14 +77,14 @@ def  environment = "{ENVIRONMENT}"
 // Please use according your team
 // If you will need an ingress controller that will need a internal dns then you must to use production namespace
 // If the internal dns does not matter then you can use according your team
-def namespace = "{NAMESPACE}"
+def namespace = "emma-web"
 
 // @imageContainerBaseM this will store the docker image of maven.
 // this stores a custom mvnseeting.xml in order to access to our Nexus server if you need to dowload from a repository.
 // Maven Docker Images available in each projet.
 // gcr.io/devops8687/is-maven-3-6-jdk8:v1
-def imageContainerBaseM = "gcr.io/devops8687/it-angular-app:gcp.4"
-def nameImageM = "it-angular-app"
+// def imageContainerBaseM = "gcr.io/devops8687/frontendweb:develop.95"
+// def nameImageM = "frontendweb"
 
 //@projectKey It will store  the project name if you will need scan the repository in SonarQube Server
 // http://172.25.29.38:8080
@@ -101,12 +101,12 @@ def tokenSonar = "41deb25d1f4f533b039c1710f0cb00b1896175be"
 
 //@warname defined of pom.xml
 // Tomcat usually take the name of war in order to set the context path of application
-def warname = "WARNAME.war"
+//def warname = "WARNAME.war"
 
 //@src-app it will store the name folder of src-app where you have the code
 // Check the slide how to Structure my projects
 // https://docs.google.com/presentation/d/1FDegGob2ZWybULpLcADVB1XuSFBOuvqVH8nXu0pqDZc/edit#slide=id.g60dd7cd549_0_91
-def srcapp= "APPLICATION_SRC"
+//def srcapp= "APPLICATION_SRC"
 
 
 // This function send a notification via Slack
@@ -296,11 +296,6 @@ spec:
   # This service account is intern and it was created inside cluster
   # Don't confuse with GCP SA
   serviceAccountName: main-jenkins
-  tolerations:
-  - key: dedicated
-    operator: Equal
-    value: jobs
-    effect: "NoSchedule"
   containers:
   - name: jnlp
     tty: true
@@ -326,6 +321,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: kubectl
+    image: gcr.io/cloud-builders/kubectl
+    command:
+    - cat
+    tty: true    
 """
 }
   }
@@ -429,15 +429,35 @@ spec:
     stage('Build/Push docker image'){
       steps{
             container('gcloud'){
-                
-                
                 sh "PYTHONUNBUFFERED=1 gcloud builds submit -t ${imageTag} --gcs-log-dir=gs://157582299266-cloudbuild-logs-cicd/ ."
-              
             }
       }
     }
 
-  }
+tage('Deploy on GKE Dev') {
+     when {
+          expression { changesCommit == 'TRUE' }
+         }
+      steps{
+       container('kubectl') {
+         // Apply changes in ConfigMaps and Secrets
+        //  sh("kubectl --namespace=${namespace} apply -f ${configMapInstanceCloudProxy}")
+        //  sh("kubectl --namespace=${namespace} apply -f ${secretCredentials}")
+    
+
+         sh("sed -i.bak 's#${imageContainerBase}#${imageTag}#' ./${deploymentApp}")
+         sh("kubectl --namespace=${namespace} apply -f  ${deploymentApp} --record=true")
+
+       }
+     }
+   }
+
+
+
+  } //End 
+
+
+
   
     // post {
     //     always {
