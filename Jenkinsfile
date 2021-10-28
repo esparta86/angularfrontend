@@ -411,19 +411,19 @@ spec:
   // }
 
 
-  stage('e2e') {
+    stage('e2e') {
 
-  steps {
+    steps {
 
-        container('node-cypress-image') {
-          sh "npm ci"
-          sh "npm run build"
-          sh "ls -ls"
-          sh "npm run ci:cy-run"
-        }
-        sleep 5
-        }
-  } 
+          container('node-cypress-image') {
+            sh "npm ci"
+            sh "npm run build"
+            sh "ls -ls"
+            sh "npm run ci:cy-run"
+          }
+          sleep 5
+          }
+    } 
 
 
     stage('Build/Push docker image'){
@@ -434,23 +434,23 @@ spec:
       }
     }
 
-tage('Deploy on GKE Dev') {
-     when {
-          expression { changesCommit == 'TRUE' }
-         }
-      steps{
-       container('kubectl') {
-         // Apply changes in ConfigMaps and Secrets
-        //  sh("kubectl --namespace=${namespace} apply -f ${configMapInstanceCloudProxy}")
-        //  sh("kubectl --namespace=${namespace} apply -f ${secretCredentials}")
-    
+    stage('Deploy on GKE Dev') {
+        when {
+              expression { changesCommit == 'TRUE' }
+            }
+          steps{
+          container('kubectl') {
+            // Apply changes in ConfigMaps and Secrets
+            //  sh("kubectl --namespace=${namespace} apply -f ${configMapInstanceCloudProxy}")
+            //  sh("kubectl --namespace=${namespace} apply -f ${secretCredentials}")
+        
 
-         sh("sed -i.bak 's#${imageContainerBase}#${imageTag}#' ./${deploymentApp}")
-         sh("kubectl --namespace=${namespace} apply -f  ${deploymentApp} --record=true")
+            sh("sed -i.bak 's#${imageContainerBase}#${imageTag}#' ./${deploymentApp}")
+            sh("kubectl --namespace=${namespace} apply -f  ${deploymentApp} --record=true")
 
-       }
-     }
-   }
+          }
+        }
+      }
 
 
 
