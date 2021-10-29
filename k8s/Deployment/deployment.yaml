@@ -33,7 +33,7 @@ metadata:
   name: angulardemo-deployment  # appname-branchname
   # [START STRATEGY LABELS] 
   labels:
-    name: angulardemo-deployment
+    app: angulardemo-deployment
     # microservices usually expose to internet
     # internalmicroservice does not have an ingress controller or load balancer that exposes toward to internet
     type_component: webapp
@@ -64,7 +64,7 @@ spec:
     metadata:
     # [START STRATEGY LABELS]
       labels:
-        name: angulardemo-deployment
+        app: angulardemo-deployment
         # microservices usually expose to internet
         # internalmicroservice does not have an ingress controller or load balancer that exposes toward to internet
         type_component: webapp
