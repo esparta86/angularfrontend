@@ -37,7 +37,7 @@ metadata:
     # microservices usually expose to internet
     # internalmicroservice does not have an ingress controller or load balancer that exposes toward to internet
     type_component: webapp
-    language: php | python | java | javascript
+    language: javascript
     owner: novatechdev 
     managed-by: jenkins
     environment: development 
@@ -68,7 +68,7 @@ spec:
         # microservices usually expose to internet
         # internalmicroservice does not have an ingress controller or load balancer that exposes toward to internet
         type_component: webapp
-        language: php | python | java | javascript
+        language: javascript
         owner: novatechdev
         managed-by: jenkins
         environment: development
