@@ -442,6 +442,7 @@ spec:
 
       stage('Deploy on Bucket'){
         steps{
+          sleep 300
            container('cloudsdk'){
              sh("Uploading app to the bucket")
              sh("ls -l")
