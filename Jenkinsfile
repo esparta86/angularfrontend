@@ -350,18 +350,6 @@ spec:
         }
    }
 
-  //  stage('Code review - SonarQube') {
-  //     steps {
-  //          script  {
-  //                 sonarqubeScannerHome = tool 'sonarqub-scanner';
-  //                 }
-  //             withSonarQubeEnv('SonarUnicomer') {
-  //               sh "npm install -D typescript"
-  //               sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey}  -Dsonar.sources=${workspacePipeline}/${sources} -Dsonar.host.url=http://34.72.176.3:9000 -Dsonar.login=${tokenSonar} -Dsonar.sourceEncoding=UTF-8 -Dsonar.typescript.tsconfigPath=tsconfig.json"
-  //             }    
-  //     }
-  // } 
-
 
      stage('Analysis and Quality Gate  - SonarQube') {
       steps {
@@ -375,28 +363,18 @@ spec:
 
 
 
-  //  stage('SonarQube Quality Gate') {
-  //        steps{
-  //           script  {
-  //              def qualitygate = waitForQualityGate()
-  //               if (qualitygate.status == "ERROR"  ) {
-  //                  error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-  //               }
-  //           }
-  //        }
-  //    }
 
-  stage('Lint') {
+  // stage('Lint') {
 
-    steps {
-          container('node-cypress-image') {
-           sh "npm install"
-            sh "npm run lint"
-            sh "npm run test"
-          }
-          sleep 5
-    }
-  }
+  //   steps {
+  //         container('node-cypress-image') {
+  //          sh "npm install"
+  //           sh "npm run lint"
+  //           sh "npm run test"
+  //         }
+  //         sleep 5
+  //   }
+  // }
 
  
 
@@ -411,19 +389,19 @@ spec:
   // }
 
 
-    stage('e2e') {
+    // stage('e2e') {
 
-    steps {
+    // steps {
 
-          container('node-cypress-image') {
-            sh "npm ci"
-            sh "npm run build"
-            sh "ls -ls"
-            sh "npm run ci:cy-run"
-          }
-          sleep 5
-          }
-    } 
+    //       container('node-cypress-image') {
+    //         sh "npm ci"
+    //         sh "npm run build"
+    //         sh "ls -ls"
+    //         sh "npm run ci:cy-run"
+    //       }
+    //       sleep 5
+    //       }
+    // } 
 
 
     stage('Build/Push docker image'){
@@ -435,9 +413,7 @@ spec:
     }
 
     stage('Deploy on GKE Dev') {
-        when {
-              expression { changesCommit == 'TRUE' }
-            }
+     
           steps{
           container('kubectl') {
             // Apply changes in ConfigMaps and Secrets
