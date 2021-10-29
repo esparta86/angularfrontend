@@ -1,0 +1,34 @@
+##########################################################################################################################
+# Lisandro Antonio Rafaelano Colocho
+#
+# We are using nodeport when we are going to create an ingress controller
+# Because it helps to create a backendService and the default healthcheck is going to check on that port if 
+# the app still live
+# 
+############################################################################################################################
+
+kind: Service
+apiVersion: v1
+metadata:
+  name:  angulardemo-nodeport-service
+  labels:
+    app: angulardemo-deployment
+    # microservices usually expose to internet
+    # internalmicroservice does not have an ingress controller or load balancer that exposes toward to internet
+    type_component: webapp
+    language: javascript
+    owner: novatechdev 
+    managed-by: jenkins
+    environment: development 
+    region: regional  
+spec:
+   # [START SELECTOR] 
+  selector:
+    app: angulardemo-deployment
+    environment: development 
+   # [END SELECTOR] 
+  type: NodePort
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
