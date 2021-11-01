@@ -441,7 +441,7 @@ spec:
            container('cloudsdk'){
              sh("echo 'Uploading app to the bucket'")
              sh("ls -l")
-             sh("gsutil -m mv dist/ gs://angular-frontend-app/")
+             sh("gsutil -m mv dist/unicomerFront gs://angular-frontend-app/")
              sh("echo 'Done!!'")
            }
         }
