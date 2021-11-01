@@ -304,11 +304,6 @@ spec:
     command:
     - cat
     tty: true 
-  - name: sonarqube
-    image:  sonarsource/sonar-scanner-cli:4
-    command:
-    - cat
-    tty: true 
   - name: gcloud
     image: gcr.io/cloud-builders/gcloud:latest
     resources:
@@ -444,10 +439,10 @@ spec:
         steps{
           sleep 300
            container('cloudsdk'){
-             sh("Uploading app to the bucket")
+             sh("echo 'Uploading app to the bucket'")
              sh("ls -l")
              sh("gsutil -m mv dist/ gs://angular-frontend-app/")
-             sh("Done!!")
+             sh("echo 'Done!!'")
            }
         }
       }
