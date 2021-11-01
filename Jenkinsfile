@@ -357,21 +357,7 @@ spec:
         }
    }
 
-
-     stage('Analysis and Quality Gate  - SonarQube') {
-      steps {
-           container('node-cypress-image'){
-             sh "npm install"
-             sh "npm run sonar-scanner"
-           }   
-      }
-  } 
-
-
-
-
-
-  stage('Lint') {
+     stage('Lint & Unit testing') {
 
     steps {
           container('node-cypress-image') {
@@ -383,7 +369,14 @@ spec:
     }
   }
 
- 
+
+     stage('Analysis and Quality Gate  - SonarQube') {
+      steps {
+           container('node-cypress-image'){
+             sh "npm run sonar-scanner"
+           }   
+      }
+  } 
 
   // stage('Unit Testing') {
 

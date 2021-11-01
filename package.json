@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build --base-href .",
     "watch": "ng build --watch --configuration development",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "ng lint --fix --max-warnings 25",
     "prepare": "husky install",
     "e2e": "ng e2e",
