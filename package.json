@@ -4,14 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href /emma-front --deploy-url /emma-front/",
+    "build": "ng build --prod --base-href /emma-front/ --deploy-url /emma-front/ ",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "lint": "ng lint --fix --max-warnings 25",
     "prepare": "husky install",
     "e2e": "ng e2e",
     "ci:start-server": "angular-http-server --path ./dist/unicomerFront -p 4200",
-    "ci:cy-run": "start-server-and-test ci:start-server http://localhost:4200/emma-front cypress:run",
+    "ci:cy-run": "start-server-and-test ci:start-server http://localhost:4200/emma-front/ cypress:run",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --headless --browser chrome",
     "sonar-scanner": "sonar-scanner "
