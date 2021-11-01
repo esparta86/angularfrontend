@@ -358,14 +358,14 @@ spec:
    }
 
 
-     stage('Analysis and Quality Gate  - SonarQube') {
-      steps {
-           container('node-cypress-image'){
-             sh "npm install"
-             sh "npm run sonar-scanner"
-           }   
-      }
-  } 
+  //    stage('Analysis and Quality Gate  - SonarQube') {
+  //     steps {
+  //          container('node-cypress-image'){
+  //            sh "npm install"
+  //            sh "npm run sonar-scanner"
+  //          }   
+  //     }
+  // } 
 
 
 
