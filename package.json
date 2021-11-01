@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href /emma-front",
+    "build": "ng build --base-href /emma-front --deploy-url /emma-front/",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "lint": "ng lint --fix --max-warnings 25",
