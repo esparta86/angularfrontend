@@ -364,7 +364,7 @@ spec:
            sh "npm install"
             sh "npm run lint"
             sh "npm run test"
-            sh "ls -ls"
+            sh "ls -la coverage"
           }
           sleep 5
     }
