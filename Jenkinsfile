@@ -364,7 +364,7 @@ spec:
            sh "npm install"
             sh "npm run lint"
             sh "npm run test"
-            sh "ls -la coverage"
+            sh "ls -la coverage/jestProject"
           }
           sleep 5
     }
