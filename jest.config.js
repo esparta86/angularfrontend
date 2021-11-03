@@ -5,6 +5,5 @@ module.exports = {
   testPathIgnorePatterns: ["<rootDir>/cypress/"],
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  collectCoverage: true,
-  coverageDirectory: 'coverage/jestProject'
+  collectCoverage: true
 };
