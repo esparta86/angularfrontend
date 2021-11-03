@@ -56,6 +56,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.0",
     "jest": "latest",
+    "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^11.2.0",
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.1",
@@ -65,5 +66,9 @@
   },
   "lint-staged": {
     "*.ts": "ng lint"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "testResultsProcessor": "jest-sonar-reporter"
   }
 }
