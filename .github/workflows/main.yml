@@ -39,6 +39,9 @@ jobs:
       
       - run: ng build --prod --output-path=dist
       
+      - name: clean or remove all object before
+        run: aws s3 rm s3://webaction.site.com --recursive
+      
       - name: Deploy to S3
         run:  aws s3 sync ./dist s3://webaction.site.com
       
